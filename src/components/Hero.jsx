@@ -9,7 +9,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-purple-700 to-indigo-800">
+    <div className="relative overflow-hidden bg-gradient-to-r from-sky-500 to-blue-600">
       <div className="absolute inset-0">
         <svg className="absolute left-full transform -translate-y-3/4 -translate-x-1/4 md:-translate-y-1/2 lg:-translate-x-1/2" width="404" height="784" fill="none" viewBox="0 0 404 784">
           <defs>
@@ -34,21 +34,21 @@ const Hero = () => {
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl">
               <span className="block">Launch Your Career</span>
-              <span className="block text-purple-200">With Premium Internships</span>
+              <span className="block text-sky-100">With Premium Internships</span>
             </h1>
-            <p className="mt-3 text-base text-purple-200 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+            <p className="mt-3 text-base text-sky-100 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
               Find the perfect internship to kickstart your career. Thousands of opportunities from top companies waiting for you.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
                 onClick={handleBrowseClick}
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-purple-900 bg-white hover:bg-purple-50 shadow-md transition duration-150 ease-in-out"
+                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-sky-700 bg-white hover:bg-sky-50 shadow-md transition duration-150 ease-in-out"
               >
                 Browse Internships
               </button>
               <a
                 href="#"
-                className="inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-purple-800 transition duration-150 ease-in-out"
+                className="inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-sky-700 transition duration-150 ease-in-out"
               >
                 For Employers
               </a>
@@ -61,12 +61,12 @@ const Hero = () => {
                 <img className="h-8 w-8 rounded-full ring-2 ring-white" src="https://randomuser.me/api/portraits/women/14.jpg" alt="" />
                 <img className="h-8 w-8 rounded-full ring-2 ring-white" src="https://randomuser.me/api/portraits/men/16.jpg" alt="" />
               </div>
-              <span className="text-sm text-indigo-100">Join 10,000+ students who found their dream internships</span>
+              <span className="text-sm text-blue-100">Join 10,000+ students who found their dream internships</span>
             </div>
           </div>
           <div className="md:w-1/2">
             <div className="relative">
-              <div className="absolute -inset-0.5 bg-purple-500 rounded-lg blur opacity-75"></div>
+              <div className="absolute -inset-0.5 bg-sky-400 rounded-lg blur opacity-75"></div>
               <img
                 className="relative h-auto w-full object-cover rounded-lg shadow-2xl"
                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80"

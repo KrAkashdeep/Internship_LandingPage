@@ -70,56 +70,53 @@ const internships = [
   }
 ];
 
-// Update the InternshipCard component within the file
 const InternshipCard = ({ internship }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100 hover:border-purple-200">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100 hover:border-sky-200">
       <div className="p-6">
         <div className="flex items-center mb-4">
-          <img className="h-12 w-12 rounded-full mr-4 ring-2 ring-purple-100 object-cover" src={internship.logo} alt={internship.company} />
+          <img className="h-12 w-12 rounded-full mr-4 ring-2 ring-sky-100 object-cover" src={internship.logo} alt={internship.company} />
           <div>
             <h3 className="text-lg font-semibold text-gray-900">{internship.title}</h3>
             <p className="text-sm text-gray-600">{internship.company}</p>
           </div>
         </div>
+        
         <div className="mb-4">
           <div className="flex items-center text-sm text-gray-500 mb-1">
-            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+            <svg className="h-4 w-4 mr-1 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             {internship.location}
           </div>
           <div className="flex items-center text-sm text-gray-500 mb-1">
-            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+            <svg className="h-4 w-4 mr-1 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {internship.duration}
           </div>
           <div className="flex items-center text-sm text-gray-500">
-            <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+            <svg className="h-4 w-4 mr-1 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             {internship.stipend}
           </div>
         </div>
+        
         <p className="text-sm text-gray-600 mb-4">{internship.description}</p>
+        
         <div className="flex flex-wrap gap-2 mb-4">
           {internship.skills.map((skill, index) => (
-            <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+            <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800">
               {skill}
             </span>
           ))}
         </div>
-        <div className="flex gap-2">
-          <button className="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded transition duration-150 ease-in-out">
-            Apply Now
-          </button>
-          <button className="flex-none w-10 h-10 flex items-center justify-center border border-purple-700 text-purple-700 hover:bg-purple-50 rounded transition duration-150 ease-in-out">
-            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-            </svg>
-          </button>
-        </div>
+        
+        <button className="w-full bg-sky-50 hover:bg-sky-100 text-sky-700 font-medium py-2 px-4 rounded-md transition duration-150 ease-in-out border border-sky-200 hover:border-sky-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
+          View Details
+        </button>
       </div>
     </div>
   );
@@ -127,34 +124,33 @@ const InternshipCard = ({ internship }) => {
 
 const InternshipSection = () => {
   const navigate = useNavigate();
-
+  
   const handleBrowseMore = () => {
     navigate('/browse-internships');
-    window.scrollTo(0, 0); // Scroll to top when navigating
   };
-
+  
   return (
-    <section id="internships" className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             Featured Internships
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-            Discover opportunities that match your skills and career goals
+            Discover opportunities from top companies across various industries
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {internships.map((internship) => (
+        
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {internships.slice(0, 6).map((internship) => (
             <InternshipCard key={internship.id} internship={internship} />
           ))}
         </div>
-
+        
         <div className="mt-12 text-center">
           <button 
             onClick={handleBrowseMore}
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-all duration-200"
           >
             Browse More Internships
             <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

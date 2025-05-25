@@ -45,13 +45,27 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 bg-gradient-to-r from-sky-500 to-blue-600 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 -right-24 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-24 left-1/3 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+      </div>
+      
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-5" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      ></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
             How It Works
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-indigo-200">
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-sky-100">
             Your journey to landing the perfect internship in four simple steps
           </p>
         </div>
@@ -61,16 +75,16 @@ const HowItWorks = () => {
             {steps.map((step) => (
               <div key={step.id} className="relative">
                 <div className="flex flex-col items-center">
-                  <div className="flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white mb-4 shadow-lg">
+                  <div className="flex items-center justify-center h-16 w-16 rounded-full bg-sky-400 text-white mb-4 shadow-md">
                     {step.icon}
                   </div>
                   <div className="text-center">
                     <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-                    <p className="text-blue-200">{step.description}</p>
+                    <p className="text-sky-100">{step.description}</p>
                   </div>
                 </div>
                 {step.id !== steps.length && (
-                  <div className="hidden lg:block absolute top-8 left-full w-12 h-1 bg-purple-400 transform -translate-x-6"></div>
+                  <div className="hidden lg:block absolute top-8 left-full w-12 h-1 bg-sky-300 transform -translate-x-6"></div>
                 )}
               </div>
             ))}
@@ -78,7 +92,7 @@ const HowItWorks = () => {
         </div>
         
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-900 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition duration-150 ease-in-out">
+          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-sky-700 bg-white hover:bg-sky-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 shadow-md transition duration-150 ease-in-out">
             Get Started Now
           </button>
         </div>

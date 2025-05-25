@@ -331,6 +331,7 @@ const BrowseInternship = () => {
   }, []);
 
   // Enhanced FilterNavItem component with hover dropdown functionality
+  // FilterNavItem component update
   const FilterNavItem = ({ title, items, itemType }) => {
     const [isHovered, setIsHovered] = useState(false);
     
@@ -342,7 +343,7 @@ const BrowseInternship = () => {
       >
         <button 
           className={`px-5 py-3 font-medium focus:outline-none transition-colors duration-200 flex items-center ${
-            selectedFilters[itemType] ? 'text-purple-700' : 'text-gray-700 hover:text-purple-700'
+            selectedFilters[itemType] ? 'text-sky-700' : 'text-gray-700 hover:text-sky-700'
           }`}
           aria-expanded={isHovered}
           aria-haspopup="true"
@@ -371,8 +372,8 @@ const BrowseInternship = () => {
                     }}
                     className={`flex items-center w-full px-4 py-2.5 text-sm rounded-lg transition-all duration-200 ${
                       selectedFilters[itemType] === item.id 
-                        ? 'bg-purple-100 text-purple-800' 
-                        : 'text-gray-700 hover:bg-purple-50 hover:text-purple-700'
+                        ? 'bg-sky-100 text-sky-800' 
+                        : 'text-gray-700 hover:bg-sky-50 hover:text-sky-700'
                     }`}
                     style={{
                       animationDelay: `${index * 30}ms`,
@@ -380,7 +381,7 @@ const BrowseInternship = () => {
                       animation: 'fadeIn 0.3s ease-out forwards'
                     }}
                   >
-                    <div className="w-9 h-9 mr-3 flex-shrink-0 bg-purple-50 rounded-full p-1.5 flex items-center justify-center">
+                    <div className="w-9 h-9 mr-3 flex-shrink-0 bg-sky-50 rounded-full p-1.5 flex items-center justify-center">
                       {item.icon ? (
                         <img 
                           src={item.icon} 
@@ -392,7 +393,7 @@ const BrowseInternship = () => {
                           }}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-purple-500">
+                        <div className="w-full h-full flex items-center justify-center text-sky-500">
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                           </svg>
@@ -523,43 +524,43 @@ const BrowseInternship = () => {
           <div className="flex items-center mb-4">
             <img className="h-14 w-14 rounded-full mr-4 ring-2 ring-purple-200 object-cover shadow-sm" src={internship.logo} alt={internship.company} />
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 hover:text-purple-700 transition-colors duration-200">{internship.title}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 hover:text-sky-700 transition-colors duration-200">{internship.title}</h3>
               <p className="text-sm text-gray-600">{internship.company}</p>
             </div>
           </div>
           <div className="mb-4 bg-gray-50 p-3 rounded-lg">
             <div className="flex items-center text-sm text-gray-500 mb-2">
-              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4 mr-2 text-sky-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
               {internship.location}
             </div>
             <div className="flex items-center text-sm text-gray-500 mb-2">
-              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4 mr-2 text-sky-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
               </svg>
               {internship.duration}
             </div>
             <div className="flex items-center text-sm text-gray-500">
-              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4 mr-2 text-sky-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
-              <span className="font-medium text-purple-700">{internship.stipend}</span>
+              <span className="font-medium text-sky-700">{internship.stipend}</span>
             </div>
           </div>
           <p className="text-sm text-gray-600 mb-4 line-clamp-2">{internship.description}</p>
           <div className="flex flex-wrap gap-2 mb-5">
             {internship.skills.map((skill, index) => (
-              <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200">
+              <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-sky-100 text-sky-800 border border-sky-200">
                 {skill}
               </span>
             ))}
           </div>
           <div className="flex gap-3">
-            <button className="flex-1 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-medium py-2.5 px-4 rounded-lg transition duration-150 ease-in-out shadow-md hover:shadow-lg">
+            <button className="flex-1 bg-gradient-to-r from-sky-600 to-sky-800 hover:from-sky-700 hover:to-sky-900 text-white font-medium py-2.5 px-4 rounded-lg transition duration-150 ease-in-out shadow-md hover:shadow-lg">
               Apply Now
             </button>
-            <button className="flex-none w-11 h-11 flex items-center justify-center border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg transition duration-150 ease-in-out">
+            <button className="flex-none w-11 h-11 flex items-center justify-center border border-sky-300 text-sky-700 hover:bg-sky-50 rounded-lg transition duration-150 ease-in-out">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
@@ -590,7 +591,7 @@ const BrowseInternship = () => {
         {/* Header with search bar */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div className="mb-6 md:mb-0">
-            <h1 className="text-3xl font-extrabold text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+            <h1 className="text-3xl font-extrabold text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-blue-600">
               Browse Internships
             </h1>
             <p className="mt-2 text-lg text-gray-600">
@@ -603,7 +604,7 @@ const BrowseInternship = () => {
               placeholder="Search internships..."
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full md:w-72 px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 shadow-sm"
+              className="w-full md:w-72 px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 shadow-sm"
             />
             <svg 
               className="absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" 
@@ -627,9 +628,9 @@ const BrowseInternship = () => {
 
         {/* Active Filter Indicator */}
         {activeFilter && (
-          <div className="mb-8 flex items-center bg-purple-50 p-3 rounded-lg border border-purple-100 shadow-sm">
+          <div className="mb-8 flex items-center bg-sky-50 p-3 rounded-lg border border-sky-100 shadow-sm">
             <span className="text-gray-600 mr-2">Filtered by:</span>
-            <span className="bg-white text-purple-800 px-4 py-1.5 rounded-full text-sm font-medium flex items-center shadow-sm border border-purple-200">
+            <span className="bg-white text-sky-800 px-4 py-1.5 rounded-full text-sm font-medium flex items-center shadow-sm border border-sky-200">
               {filterType === 'category' && categories.find(cat => cat.id === activeFilter)?.name}
               {filterType === 'city' && cities.find(city => city.id === activeFilter)?.name}
               {filterType === 'state' && states.find(state => state.id === activeFilter)?.name}
@@ -640,7 +641,7 @@ const BrowseInternship = () => {
                   setFilterType(null);
                   setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
                 }}
-                className="ml-2 text-purple-600 hover:text-purple-800 focus:outline-none"
+                className="ml-2 text-sky-600 hover:text-sky-800 focus:outline-none"
               >
                 <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -655,7 +656,7 @@ const BrowseInternship = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center">
             {activeFilter ? 'Matching Internships' : 'Recently Added Internships'}
             {!activeFilter && (
-              <span className="ml-3 bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">New</span>
+              <span className="ml-3 bg-sky-100 text-sky-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">New</span>
             )}
           </h2>
           
@@ -679,7 +680,7 @@ const BrowseInternship = () => {
                   setSearchQuery('');
                   setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
                 }}
-                className="mt-6 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
+                className="mt-6 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 transition-colors duration-200"
               >
                 Reset filters
               </button>
@@ -694,7 +695,7 @@ const BrowseInternship = () => {
               <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">
                 Previous
               </button>
-              <button className="px-3 py-2 rounded-md text-sm font-medium text-white bg-purple-600 border border-purple-600">
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-white bg-sky-600 border border-sky-600">
                 1
               </button>
               <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">

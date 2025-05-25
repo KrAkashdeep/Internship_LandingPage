@@ -11,7 +11,7 @@ const FAQItem = ({ question, answer }) => {
       >
         <span className="text-lg font-medium text-gray-900">{question}</span>
         <svg
-          className={`h-6 w-6 text-indigo-500 transform ${isOpen ? 'rotate-180' : ''}`}
+          className={`h-6 w-6 text-sky-500 transform ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -78,7 +78,7 @@ const FAQSection = () => {
           <p className="text-base text-gray-500 mb-4">
             Still have questions? We're here to help!
           </p>
-          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
             Contact Support
           </button>
         </div>

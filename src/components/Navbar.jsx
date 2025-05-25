@@ -10,15 +10,15 @@ const Navbar = ({ onLoginClick }) => {
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-purple-100">
+    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-sky-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-purple-700 to-indigo-600 bg-clip-text text-transparent">InternHub</Link>
+              <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-sky-600 to-blue-500 bg-clip-text text-transparent">InternHub</Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link to="/" className="border-purple-700 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              <Link to="/" className="border-sky-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                 Home
               </Link>
               <button 
@@ -38,7 +38,7 @@ const Navbar = ({ onLoginClick }) => {
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <button
               onClick={onLoginClick}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
               Login
             </button>
@@ -69,7 +69,7 @@ const Navbar = ({ onLoginClick }) => {
       {isMenuOpen && (
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
-            <Link to="/" className="bg-purple-50 border-purple-700 text-purple-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+            <Link to="/" className="bg-sky-50 border-sky-500 text-sky-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
               Home
             </Link>
             <button
@@ -89,7 +89,7 @@ const Navbar = ({ onLoginClick }) => {
             <div className="flex items-center px-4">
               <button
                 onClick={onLoginClick}
-                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-700 hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
               >
                 Login
               </button>

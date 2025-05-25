@@ -54,9 +54,8 @@ const TestimonialSection = () => {
     setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
 
-  // Update within the file
   return (
-    <section id="testimonials" className="py-16 bg-gradient-to-b from-white to-purple-50">
+    <section id="testimonials" className="py-16 bg-gradient-to-b from-white to-sky-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
@@ -68,7 +67,7 @@ const TestimonialSection = () => {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-sky-100">
             <div className="md:flex">
               <div className="md:flex-shrink-0 hidden md:block">
                 <img 
@@ -90,7 +89,7 @@ const TestimonialSection = () => {
                   </div>
                 </div>
                 <div className="relative">
-                  <svg className="absolute top-0 left-0 transform -translate-x-6 -translate-y-8 h-16 w-16 text-indigo-200" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                  <svg className="absolute top-0 left-0 transform -translate-x-6 -translate-y-8 h-16 w-16 text-sky-200" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                     <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                   </svg>
                   <p className="relative mt-4 text-xl text-gray-600 italic">
@@ -115,7 +114,7 @@ const TestimonialSection = () => {
           <div className="mt-6 flex justify-center space-x-3">
             <button
               onClick={prevTestimonial}
-              className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -127,7 +126,7 @@ const TestimonialSection = () => {
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   className={`h-2 w-2 rounded-full ${
-                    index === activeIndex ? 'bg-indigo-600' : 'bg-gray-300'
+                    index === activeIndex ? 'bg-sky-600' : 'bg-gray-300'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -135,7 +134,7 @@ const TestimonialSection = () => {
             </div>
             <button
               onClick={nextTestimonial}
-              className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -144,14 +143,14 @@ const TestimonialSection = () => {
           </div>
         </div>
         
-        <div className="mt-16 bg-gradient-to-r from-blue-600 to-purple-700 rounded-lg shadow-xl overflow-hidden">
+        <div className="mt-16 bg-gradient-to-r from-sky-500 to-blue-600 rounded-lg shadow-xl overflow-hidden">
           <div className="px-6 py-12 md:py-16 md:px-12 text-center md:text-left">
             <div className="md:flex md:items-center md:justify-between">
               <div className="md:w-2/3">
                 <h3 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
                   Ready to find your perfect internship?
                 </h3>
-                <p className="mt-4 text-lg text-indigo-100">
+                <p className="mt-4 text-lg text-sky-100">
                   Join thousands of students who have launched their careers through InternHub.
                 </p>
               </div>
@@ -159,7 +158,7 @@ const TestimonialSection = () => {
                 <div className="rounded-md shadow">
                   <a
                     href="#"
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-10"
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-sky-700 bg-white hover:bg-sky-50 md:py-4 md:text-lg md:px-10"
                   >
                     Sign Up Now
                   </a>

@@ -8,7 +8,7 @@ import InternshipSection from './components/InternshipSection';
 import BrowseInternship from './components/BrowseInternship';
 import TestimonialSection from './components/TestimonialSection';
 import FAQSection from './components/FAQSection';
-// import LoginUI from './components/LoginUI';
+import LoginUI from './components/LoginUI'; // Uncommented this import
 import Footer from './components/Footer';
 
 // Create a Home component that contains all the landing page sections

@@ -9,7 +9,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-purple-700">
+    <div className="relative overflow-hidden bg-gradient-to-r from-purple-700 to-indigo-800">
       <div className="absolute inset-0">
         <svg className="absolute left-full transform -translate-y-3/4 -translate-x-1/4 md:-translate-y-1/2 lg:-translate-x-1/2" width="404" height="784" fill="none" viewBox="0 0 404 784">
           <defs>

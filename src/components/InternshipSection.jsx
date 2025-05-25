@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const internships = [
   {
@@ -72,10 +73,10 @@ const internships = [
 // Update the InternshipCard component within the file
 const InternshipCard = ({ internship }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100 hover:border-purple-200">
       <div className="p-6">
         <div className="flex items-center mb-4">
-          <img className="h-12 w-12 rounded-full mr-4 ring-2 ring-purple-100" src={internship.logo} alt={internship.company} />
+          <img className="h-12 w-12 rounded-full mr-4 ring-2 ring-purple-100 object-cover" src={internship.logo} alt={internship.company} />
           <div>
             <h3 className="text-lg font-semibold text-gray-900">{internship.title}</h3>
             <p className="text-sm text-gray-600">{internship.company}</p>
@@ -125,6 +126,13 @@ const InternshipCard = ({ internship }) => {
 };
 
 const InternshipSection = () => {
+  const navigate = useNavigate();
+
+  const handleBrowseMore = () => {
+    navigate('/browse-internships');
+    window.scrollTo(0, 0); // Scroll to top when navigating
+  };
+
   return (
     <section id="internships" className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,8 +152,14 @@ const InternshipSection = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            View All Internships
+          <button 
+            onClick={handleBrowseMore}
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-200"
+          >
+            Browse More Internships
+            <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </button>
         </div>
       </div>

@@ -169,7 +169,7 @@ const Footer = () => {
         </div>
         <div className="border-t border-gray-700 pt-8 pb-6">
           <p className="text-base text-gray-400 text-center">
-            &copy; 2023 InternHub. All rights reserved.
+            &copy; 2025 InternHub. All rights reserved.
           </p>
         </div>
       </div>

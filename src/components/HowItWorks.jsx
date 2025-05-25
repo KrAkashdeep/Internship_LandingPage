@@ -45,13 +45,13 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-800 to-purple-900">
+    <section className="py-16 bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
             How It Works
           </h2>
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-blue-200">
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-indigo-200">
             Your journey to landing the perfect internship in four simple steps
           </p>
         </div>

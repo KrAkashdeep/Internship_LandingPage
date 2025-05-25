@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 const BrowseInternship = () => {
-  const [activeCategory, setActiveCategory] = useState(null);
   const [activeFilter, setActiveFilter] = useState(null);
   const [filterType, setFilterType] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [displayedInternships, setDisplayedInternships] = useState([]);
-  const [hoveredSection, setHoveredSection] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [selectedFilters, setSelectedFilters] = useState({
+    category: null,
+    city: null,
+    state: null,
+    qualification: null
+  });
   
   // Categories data from the image
   const categories = [
@@ -295,11 +300,158 @@ const BrowseInternship = () => {
     }
   ];
 
+  // Add this at the beginning of your component to ensure the page starts from the top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Initialize displayed internships with recent ones
   useEffect(() => {
     // Filter to show only recent internships by default
     setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
   }, []);
+
+  // Add this at the beginning of your component to ensure the animation works
+  useEffect(() => {
+    // Add the animation class to the stylesheet if it doesn't exist
+    if (!document.querySelector('#dropdown-animation')) {
+      const style = document.createElement('style');
+      style.id = 'dropdown-animation';
+      style.innerHTML = `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out forwards;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Enhanced FilterNavItem component with hover dropdown functionality
+  const FilterNavItem = ({ title, items, itemType }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    
+    return (
+      <div 
+        className="relative filter-dropdown"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <button 
+          className={`px-5 py-3 font-medium focus:outline-none transition-colors duration-200 flex items-center ${
+            selectedFilters[itemType] ? 'text-purple-700' : 'text-gray-700 hover:text-purple-700'
+          }`}
+          aria-expanded={isHovered}
+          aria-haspopup="true"
+        >
+          <span>Search by {title}</span>
+          <svg 
+            className={`ml-1 w-4 h-4 transition-transform duration-300 ${isHovered ? 'transform rotate-180' : ''}`} 
+            fill="currentColor" 
+            viewBox="0 0 20 20"
+          >
+            <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+          </svg>
+        </button>
+        
+        {isHovered && (
+          <div className="absolute top-full left-0 mt-1 w-72 bg-white rounded-xl shadow-2xl z-[9999] p-3 border border-gray-100 animate-fadeIn">
+            <div className="py-1 max-h-80 overflow-y-auto">
+              {items && items.length > 0 ? (
+                items.map((item, index) => (
+                  <button 
+                    key={item.id}
+                    onClick={() => {
+                      filterInternships(item.id, itemType);
+                      setSelectedFilters(prev => ({ ...prev, [itemType]: item.id }));
+                      setIsHovered(false);
+                    }}
+                    className={`flex items-center w-full px-4 py-2.5 text-sm rounded-lg transition-all duration-200 ${
+                      selectedFilters[itemType] === item.id 
+                        ? 'bg-purple-100 text-purple-800' 
+                        : 'text-gray-700 hover:bg-purple-50 hover:text-purple-700'
+                    }`}
+                    style={{
+                      animationDelay: `${index * 30}ms`,
+                      opacity: 0,
+                      animation: 'fadeIn 0.3s ease-out forwards'
+                    }}
+                  >
+                    <div className="w-9 h-9 mr-3 flex-shrink-0 bg-purple-50 rounded-full p-1.5 flex items-center justify-center">
+                      {item.icon ? (
+                        <img 
+                          src={item.icon} 
+                          alt={item.name || ''} 
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDRhNCA0IDAgMTAwIDggNCA0IDAgMDAwLTh6TTQgOGE0IDQgMCAxMTggMCA0IDQgMCAwMS04IDB6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIC8+PC9zdmc+';
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-purple-500">
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                    <span className="font-medium">{item.name}</span>
+                  </button>
+                ))
+              ) : (
+                <div className="text-center py-4 text-gray-500">No items available</div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // Update the animation style to include staggered animations
+  useEffect(() => {
+    if (!document.querySelector('#dropdown-animation')) {
+      const style = document.createElement('style');
+      style.id = 'dropdown-animation';
+      style.innerHTML = `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out forwards;
+        }
+        
+        @keyframes scaleIn {
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+        
+        .filter-dropdown:hover .dropdown-item {
+          animation: scaleIn 0.2s ease-out forwards;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Remove duplicate click outside handlers and keep only one
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (openDropdown && !event.target.closest('.filter-dropdown')) {
+        setOpenDropdown(null);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openDropdown]);
 
   // Filter internships based on selected filter
   const filterInternships = (filterId, type) => {
@@ -366,48 +518,48 @@ const BrowseInternship = () => {
   // InternshipCard component (reused from InternshipSection)
   const InternshipCard = ({ internship }) => {
     return (
-      <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100">
+      <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100 transform hover:-translate-y-1 hover:scale-102 transition-transform duration-300">
         <div className="p-6">
           <div className="flex items-center mb-4">
-            <img className="h-12 w-12 rounded-full mr-4 ring-2 ring-purple-100" src={internship.logo} alt={internship.company} />
+            <img className="h-14 w-14 rounded-full mr-4 ring-2 ring-purple-200 object-cover shadow-sm" src={internship.logo} alt={internship.company} />
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">{internship.title}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 hover:text-purple-700 transition-colors duration-200">{internship.title}</h3>
               <p className="text-sm text-gray-600">{internship.company}</p>
             </div>
           </div>
-          <div className="mb-4">
-            <div className="flex items-center text-sm text-gray-500 mb-1">
-              <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+          <div className="mb-4 bg-gray-50 p-3 rounded-lg">
+            <div className="flex items-center text-sm text-gray-500 mb-2">
+              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
               {internship.location}
             </div>
-            <div className="flex items-center text-sm text-gray-500 mb-1">
-              <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+            <div className="flex items-center text-sm text-gray-500 mb-2">
+              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
               </svg>
               {internship.duration}
             </div>
             <div className="flex items-center text-sm text-gray-500">
-              <svg className="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="h-4 w-4 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
-              {internship.stipend}
+              <span className="font-medium text-purple-700">{internship.stipend}</span>
             </div>
           </div>
-          <p className="text-sm text-gray-600 mb-4">{internship.description}</p>
-          <div className="flex flex-wrap gap-2 mb-4">
+          <p className="text-sm text-gray-600 mb-4 line-clamp-2">{internship.description}</p>
+          <div className="flex flex-wrap gap-2 mb-5">
             {internship.skills.map((skill, index) => (
-              <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+              <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200">
                 {skill}
               </span>
             ))}
           </div>
-          <div className="flex gap-2">
-            <button className="flex-1 bg-purple-700 hover:bg-purple-800 text-white font-medium py-2 px-4 rounded transition duration-150 ease-in-out">
+          <div className="flex gap-3">
+            <button className="flex-1 bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-medium py-2.5 px-4 rounded-lg transition duration-150 ease-in-out shadow-md hover:shadow-lg">
               Apply Now
             </button>
-            <button className="flex-none w-10 h-10 flex items-center justify-center border border-purple-700 text-purple-700 hover:bg-purple-50 rounded transition duration-150 ease-in-out">
+            <button className="flex-none w-11 h-11 flex items-center justify-center border border-purple-300 text-purple-700 hover:bg-purple-50 rounded-lg transition duration-150 ease-in-out">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
               </svg>
@@ -418,132 +570,43 @@ const BrowseInternship = () => {
     );
   };
 
-  // Category item with dropdown
-  const CategoryItem = ({ category }) => {
-    const [showDropdown, setShowDropdown] = useState(false);
+  // Add this useEffect to close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (openDropdown && !event.target.closest('.relative')) {
+        setOpenDropdown(null);
+      }
+    };
     
-    return (
-      <div 
-        className="flex flex-col items-center relative"
-        onMouseEnter={() => setShowDropdown(true)}
-        onMouseLeave={() => setShowDropdown(false)}
-      >
-        <div 
-          className="w-24 h-24 flex flex-col items-center justify-center cursor-pointer p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-all duration-300"
-          onClick={() => setActiveCategory(category.id)}
-        >
-          <img src={category.icon} alt={category.alt} className="w-12 h-12 mb-2" />
-          <span className="text-xs text-center font-medium">{category.name}</span>
-        </div>
-        
-        {showDropdown && category.internships && category.internships.length > 0 && (
-          <div className="absolute top-full mt-2 w-64 bg-white rounded-lg shadow-xl z-10 p-2">
-            <div className="py-1">
-              {category.internships.map(internship => (
-                <a 
-                  key={internship.id}
-                  href="#" 
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-md"
-                >
-                  {internship.title} - {internship.company}
-                </a>
-              ))}
-              <div className="border-t border-gray-100 my-1"></div>
-              <a 
-                href="#" 
-                className="block px-4 py-2 text-sm text-purple-700 font-medium hover:bg-purple-50 rounded-md"
-              >
-                View all {category.name} internships
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
-
-  // Filter section component
-  const FilterSection = ({ title, items, itemType }) => {
-    const [showAll, setShowAll] = useState(false);
-    
-    return (
-      <div className="mb-10">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-900">Search by {title}</h2>
-          <a href="#" className="text-purple-700 hover:text-purple-800 flex items-center text-sm font-medium">
-            See all
-            <svg className="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-            </svg>
-          </a>
-        </div>
-        
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {items.map(item => (
-            <div key={item.id} className="flex flex-col items-center">
-              <div className="w-20 h-20 flex items-center justify-center mb-2">
-                <img src={item.icon} alt={item.name} className="max-w-full max-h-full" />
-              </div>
-              <span className="text-xs text-center">{item.name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  // New FilterNavItem component for the navigation bar
-  const FilterNavItem = ({ title, items, itemType }) => {
-    return (
-      <div 
-        className="relative"
-        onMouseEnter={() => setHoveredSection(itemType)}
-        onMouseLeave={() => setHoveredSection(null)}
-      >
-        <button className="px-4 py-2 text-gray-700 font-medium hover:text-purple-700 focus:outline-none">
-          Search by {title}
-        </button>
-        
-        {hoveredSection === itemType && (
-          <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-xl z-20 p-2">
-            <div className="py-1 max-h-80 overflow-y-auto">
-              {items.map(item => (
-                <button 
-                  key={item.id}
-                  onClick={() => filterInternships(item.id, itemType)}
-                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 rounded-md"
-                >
-                  <div className="w-8 h-8 mr-2 flex-shrink-0">
-                    <img src={item.icon} alt={item.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span>{item.name}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openDropdown]);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with search bar */}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-extrabold text-gray-900">
-            Browse Internships
-          </h1>
-          <div className="relative">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+          <div className="mb-6 md:mb-0">
+            <h1 className="text-3xl font-extrabold text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+              Browse Internships
+            </h1>
+            <p className="mt-2 text-lg text-gray-600">
+              Find the perfect opportunity that matches your skills
+            </p>
+          </div>
+          <div className="relative w-full md:w-auto">
             <input
               type="text"
               placeholder="Search internships..."
               value={searchQuery}
               onChange={handleSearch}
-              className="w-64 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+              className="w-full md:w-72 px-5 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 shadow-sm"
             />
             <svg 
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" 
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -553,9 +616,8 @@ const BrowseInternship = () => {
           </div>
         </div>
 
-        {/* Filter Navigation Bar (replacing navbar) */}
-        <div className="bg-white rounded-lg shadow-md mb-8">
-          <div className="flex flex-wrap justify-between px-4 py-3">
+        <div className="bg-white rounded-xl shadow-md mb-10 overflow-hidden">
+          <div className="flex flex-wrap justify-between px-2 py-1">
             <FilterNavItem title="Categories" items={categories} itemType="category" />
             <FilterNavItem title="Cities" items={cities} itemType="city" />
             <FilterNavItem title="States" items={states} itemType="state" />
@@ -565,9 +627,9 @@ const BrowseInternship = () => {
 
         {/* Active Filter Indicator */}
         {activeFilter && (
-          <div className="mb-6 flex items-center">
+          <div className="mb-8 flex items-center bg-purple-50 p-3 rounded-lg border border-purple-100 shadow-sm">
             <span className="text-gray-600 mr-2">Filtered by:</span>
-            <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium flex items-center">
+            <span className="bg-white text-purple-800 px-4 py-1.5 rounded-full text-sm font-medium flex items-center shadow-sm border border-purple-200">
               {filterType === 'category' && categories.find(cat => cat.id === activeFilter)?.name}
               {filterType === 'city' && cities.find(city => city.id === activeFilter)?.name}
               {filterType === 'state' && states.find(state => state.id === activeFilter)?.name}
@@ -588,31 +650,69 @@ const BrowseInternship = () => {
           </div>
         )}
 
-        {/* Rest of the content remains the same */}
-        <div className="text-center mb-12">
-          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-            Find the perfect internship opportunity that matches your skills and interests
-          </p>
+        {/* Displayed Internships */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center">
+            {activeFilter ? 'Matching Internships' : 'Recently Added Internships'}
+            {!activeFilter && (
+              <span className="ml-3 bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">New</span>
+            )}
+          </h2>
+          
+          {displayedInternships.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {displayedInternships.map(internship => (
+                <InternshipCard key={internship.id} internship={internship} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100">
+              <svg className="mx-auto h-16 w-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h3 className="mt-4 text-lg font-medium text-gray-900">No internships found</h3>
+              <p className="mt-2 text-gray-500 max-w-md mx-auto">We couldn't find any internships matching your criteria. Try adjusting your search or filter options.</p>
+              <button 
+                onClick={() => {
+                  setActiveFilter(null);
+                  setFilterType(null);
+                  setSearchQuery('');
+                  setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
+                }}
+                className="mt-6 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors duration-200"
+              >
+                Reset filters
+              </button>
+            </div>
+          )}
         </div>
-
-        {/* Categories Section */}
-        <div className="mb-12">
-          {/* ... existing Categories Section ... */}
-        </div>
-
-        {/* Cities Section */}
-        <FilterSection title="Cities" items={cities} itemType="city" />
-
-        {/* States Section */}
-        <FilterSection title="States" items={states} itemType="state" />
-
-        {/* Qualifications Section */}
-        <FilterSection title="Qualification" items={qualifications} itemType="qualification" />
-
-        {/* Featured and Recent Internships */}
-        <div className="mt-16">
-          {/* ... existing Featured and Recent Internships sections ... */}
-        </div>
+        
+        {/* Pagination - Optional */}
+        {displayedInternships.length > 0 && (
+          <div className="mt-12 flex justify-center">
+            <nav className="flex items-center space-x-2">
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">
+                Previous
+              </button>
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-white bg-purple-600 border border-purple-600">
+                1
+              </button>
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                2
+              </button>
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                3
+              </button>
+              <span className="px-3 py-2 text-gray-500">...</span>
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                8
+              </button>
+              <button className="px-3 py-2 rounded-md text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50">
+                Next
+              </button>
+            </nav>
+          </div>
+        )}
       </div>
     </section>
   );

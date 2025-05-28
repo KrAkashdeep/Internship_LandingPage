@@ -13,7 +13,6 @@ const BrowseInternship = () => {
     qualification: null
   });
   
-  // Categories data from the image
   const categories = [
     {
       id: 1,
@@ -197,7 +196,6 @@ const BrowseInternship = () => {
     }
   ];
 
-  // Cities data from the image
   const cities = [
     { id: 1, name: 'New Delhi', icon: '/icons/delhi.png' },
     { id: 2, name: 'Mumbai', icon: '/icons/mumbai.png' },
@@ -207,7 +205,6 @@ const BrowseInternship = () => {
     { id: 6, name: 'Bangalore', icon: '/icons/bangalore.png' }
   ];
 
-  // States data from the image
   const states = [
     { id: 1, name: 'Karnataka', icon: '/icons/karnataka.png' },
     { id: 2, name: 'Tamil Nadu', icon: '/icons/tamilnadu.png' },
@@ -216,7 +213,6 @@ const BrowseInternship = () => {
     { id: 5, name: 'Haryana', icon: '/icons/haryana.png' }
   ];
 
-  // Qualifications data from the image
   const qualifications = [
     { id: 1, name: 'Bachelor of Technology (B.Tech) in Computers', icon: '/icons/btech.png' },
     { id: 2, name: 'Bachelor of Commerce (B.Com) in Commerce', icon: '/icons/bcom.png' },
@@ -224,7 +220,6 @@ const BrowseInternship = () => {
     { id: 4, name: 'Bachelor of Technology (B.Tech) in IT-Software', icon: '/icons/btech-it.png' }
   ];
 
-  // Featured/Recent internships to show by default
   const featuredInternships = [
     {
       id: 701,
@@ -300,20 +295,15 @@ const BrowseInternship = () => {
     }
   ];
 
-  // Add this at the beginning of your component to ensure the page starts from the top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Initialize displayed internships with recent ones
   useEffect(() => {
-    // Filter to show only recent internships by default
     setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
   }, []);
 
-  // Add this at the beginning of your component to ensure the animation works
   useEffect(() => {
-    // Add the animation class to the stylesheet if it doesn't exist
     if (!document.querySelector('#dropdown-animation')) {
       const style = document.createElement('style');
       style.id = 'dropdown-animation';
@@ -330,8 +320,6 @@ const BrowseInternship = () => {
     }
   }, []);
 
-  // Enhanced FilterNavItem component with hover dropdown functionality
-  // FilterNavItem component update
   const FilterNavItem = ({ title, items, itemType }) => {
     const [isHovered, setIsHovered] = useState(false);
     
@@ -413,7 +401,6 @@ const BrowseInternship = () => {
     );
   };
 
-  // Update the animation style to include staggered animations
   useEffect(() => {
     if (!document.querySelector('#dropdown-animation')) {
       const style = document.createElement('style');
@@ -440,7 +427,6 @@ const BrowseInternship = () => {
     }
   }, []);
 
-  // Remove duplicate click outside handlers and keep only one
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (openDropdown && !event.target.closest('.filter-dropdown')) {
@@ -454,7 +440,6 @@ const BrowseInternship = () => {
     };
   }, [openDropdown]);
 
-  // Filter internships based on selected filter
   const filterInternships = (filterId, type) => {
     setActiveFilter(filterId);
     setFilterType(type);
@@ -488,18 +473,15 @@ const BrowseInternship = () => {
     setDisplayedInternships(filtered);
   };
 
-  // Search functionality
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
     
     if (query.trim() === '') {
-      // If search is cleared, show recent internships
       setDisplayedInternships(featuredInternships.filter(internship => internship.recent));
       return;
     }
     
-    // Search across all internships
     const allInternships = [
       ...featuredInternships,
       ...categories.flatMap(category => category.internships || [])
@@ -516,7 +498,6 @@ const BrowseInternship = () => {
     setDisplayedInternships(searchResults);
   };
 
-  // InternshipCard component (reused from InternshipSection)
   const InternshipCard = ({ internship }) => {
     return (
       <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-gray-100 transform hover:-translate-y-1 hover:scale-102 transition-transform duration-300">
@@ -571,7 +552,6 @@ const BrowseInternship = () => {
     );
   };
 
-  // Add this useEffect to close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (openDropdown && !event.target.closest('.relative')) {
@@ -588,7 +568,6 @@ const BrowseInternship = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header with search bar */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
           <div className="mb-6 md:mb-0">
             <h1 className="text-3xl font-extrabold text-gray-900 bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-blue-600">
@@ -626,7 +605,6 @@ const BrowseInternship = () => {
           </div>
         </div>
 
-        {/* Active Filter Indicator */}
         {activeFilter && (
           <div className="mb-8 flex items-center bg-sky-50 p-3 rounded-lg border border-sky-100 shadow-sm">
             <span className="text-gray-600 mr-2">Filtered by:</span>
@@ -651,7 +629,6 @@ const BrowseInternship = () => {
           </div>
         )}
 
-        {/* Displayed Internships */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center">
             {activeFilter ? 'Matching Internships' : 'Recently Added Internships'}
@@ -688,7 +665,6 @@ const BrowseInternship = () => {
           )}
         </div>
         
-        {/* Pagination - Optional */}
         {displayedInternships.length > 0 && (
           <div className="mt-12 flex justify-center">
             <nav className="flex items-center space-x-2">

@@ -44,7 +44,6 @@ const Navbar = ({ onLoginClick }) => {
             </button>
           </div>
           
-          {/* Mobile menu button */}
           <div className="flex items-center sm:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -65,7 +64,6 @@ const Navbar = ({ onLoginClick }) => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="sm:hidden">
           <div className="pt-2 pb-3 space-y-1">
